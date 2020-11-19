@@ -21,8 +21,14 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BrewSpecs from '../BrewSpecs/BrewSpecs';
 import Timer from '../Timer/Timer';
+import TastingNotes from '../TastingNotes/TastingNotes';
+import Brews from '../Brews/Brews';
+import BrewDetails from '../BrewDetails/BrewDetails';
 
 import './App.css';
+
+
+
 
 
 class App extends Component {
@@ -107,6 +113,27 @@ class App extends Component {
               exaxt
               path="/timer"
               component={Timer}
+              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/tasting"
+              component={TastingNotes}
+              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/brews"
+              component={Brews}
+              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/details"
+              component={BrewDetails}
               authRedirect="/user"
             />
 

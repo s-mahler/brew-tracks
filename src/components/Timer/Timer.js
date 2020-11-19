@@ -5,7 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class Timer extends Component {
 
     brewComplete = () => {
-        this.props.history.push('/')
+        this.props.history.push('/tasting')
     }
 
     render() {
