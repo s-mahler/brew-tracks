@@ -19,8 +19,11 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import BrewSpecs from '../BrewSpecs/BrewSpecs';
+import Timer from '../Timer/Timer';
 
 import './App.css';
+
 
 class App extends Component {
   componentDidMount() {
@@ -90,6 +93,20 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
+              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/specs"
+              component={BrewSpecs}
+              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/timer"
+              component={Timer}
               authRedirect="/user"
             />
 

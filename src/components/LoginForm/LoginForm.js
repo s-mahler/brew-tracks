@@ -32,6 +32,10 @@ class LoginForm extends Component {
 
   render() {
     return (
+
+      // Need to have conditional for different form buttons at end
+      // And toggle to show button to review recipes
+      
       <form className="formPanel" onSubmit={this.login}>
         <h2>Login</h2>
         {this.props.store.errors.loginMessage && (
@@ -65,6 +69,7 @@ class LoginForm extends Component {
         </div>
         <div>
           <input className="btn" type="submit" name="submit" value="Log In" />
+          <input className="btn" type="submit" name="submit" value="Register" />
         </div>
       </form>
     );
