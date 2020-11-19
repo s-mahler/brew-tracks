@@ -96,50 +96,43 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
             />
 
-            {/* Will neeed to remove the authRedirect once auth is set up */}
+            {/* Will neeed to modify the authRedirect once auth is set up */}
             <ProtectedRoute
               exaxt
               path="/specs"
               component={BrewSpecs}
-              authRedirect="/user"
             />
 
             <ProtectedRoute
               exaxt
               path="/timer"
               component={Timer}
-              authRedirect="/user"
             />
 
             <ProtectedRoute
               exaxt
               path="/tasting"
               component={TastingNotes}
-              authRedirect="/user"
             />
 
             <ProtectedRoute
               exaxt
               path="/brews"
               component={Brews}
-              authRedirect="/user"
             />
 
             <ProtectedRoute
               exaxt
               path="/details"
               component={BrewDetails}
-              authRedirect="/user"
             />
 
             <ProtectedRoute
               exaxt
               path="/admin"
               component={Admin}
-              authRedirect="/user"
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
