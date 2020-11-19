@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import './BrewSpecs.css'
 
 class BrewSpecs extends Component {
 
@@ -10,7 +11,7 @@ class BrewSpecs extends Component {
 
     render() {
         return (
-            <div className="formPanel">
+            <div className="formPanel specs">
                 <h1>Brew Specifications</h1>
 
                 <label>Method:</label>
