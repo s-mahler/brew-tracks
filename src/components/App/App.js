@@ -21,9 +21,12 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BrewSpecs from '../BrewSpecs/BrewSpecs';
 import Timer from '../Timer/Timer';
+import TastingNotes from '../TastingNotes/TastingNotes';
+import Brews from '../Brews/Brews';
+import BrewDetails from '../BrewDetails/BrewDetails';
+import Admin from '../Admin/Admin';
 
 import './App.css';
-
 
 class App extends Component {
   componentDidMount() {
@@ -93,21 +96,43 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
             />
 
+            {/* Will neeed to modify the authRedirect once auth is set up */}
             <ProtectedRoute
               exaxt
               path="/specs"
               component={BrewSpecs}
-              authRedirect="/user"
             />
 
             <ProtectedRoute
               exaxt
               path="/timer"
               component={Timer}
-              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/tasting"
+              component={TastingNotes}
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/brews/:id"
+              component={Brews}
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/details/:id"
+              component={BrewDetails}
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/admin"
+              component={Admin}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
