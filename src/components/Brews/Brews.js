@@ -18,6 +18,14 @@ class Brews extends Component {
         this.props.history.push('/details');
     };
 
+    componentDidMount = () => {
+        this.getUserBrews();
+    }
+
+    getUserBrews = () => {
+        this.props.dispatch({type: 'GET_BREWS', payload: this.props.match.params.id});
+    }
+
     render() {
         return (
             <>

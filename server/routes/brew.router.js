@@ -6,9 +6,9 @@ const router = express.Router();
 //     rejectUnauthenticated,
 //   } = require("../modules/authentication-middleware");
 
-router.get('/', (req, res) => {
-    const queryText = 'SELECT * FROM "brews"';
-    pool.query(queryText)
+router.get('/:id', (req, res) => {
+    const queryText = 'SELECT * FROM "brews" WHERE "user_id" = $1';
+    pool.query(queryText, [req.params.id])
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
@@ -16,3 +16,5 @@ router.get('/', (req, res) => {
             console.log('error in GET', error);
         });
 });  
+
+module.exports = router;

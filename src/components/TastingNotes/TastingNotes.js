@@ -5,7 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class TastingNotes extends Component {
 
     handleSubmit = () => {
-        this.props.history.push('/brews')
+        this.props.history.push(`/brews/${this.props.store.user.id}`)
     };
 
     render() {

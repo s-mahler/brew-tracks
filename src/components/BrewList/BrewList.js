@@ -4,8 +4,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class BrewList extends Component {
 
-
-
     render() {
         return (
             <>
