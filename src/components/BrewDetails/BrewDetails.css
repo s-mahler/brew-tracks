@@ -1,0 +1,17 @@
+.specs {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 8px 10px #888888;
+    margin: 30px;
+}
+
+.tasting {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 8px 10px #888888;
+    margin: 30px;
+}
+
+label {
+    font-weight: bold; 
+}

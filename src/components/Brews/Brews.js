@@ -34,11 +34,11 @@ class Brews extends Component {
                 
                 <ul>
                     {this.props.store.brew.map(brew => {
-                        return <li onClick={() => this.goToDetails(brew.id)}>
-                            <div>
-                                <p>{brew.origin}</p>
-                            </div>
-                        </li>
+                        return <li key={brew.id} onClick={() => this.goToDetails(brew.id)}>
+                                    <div>
+                                        <p>{brew.origin}</p>
+                                    </div>
+                                </li>
                     })}
                 </ul>
 
