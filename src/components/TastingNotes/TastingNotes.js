@@ -10,7 +10,7 @@ class TastingNotes extends Component {
 
     render() {
         return (
-            <>
+            <div className="formPanel tasting">
                 <h1>Tasting Notes</h1>
 
                 <label>Taste:</label>
@@ -26,7 +26,7 @@ class TastingNotes extends Component {
                 <input></input>
 
                 <button onClick={this.handleSubmit}>Finish</button>
-            </>
+            </div>
         )
     }
 }
