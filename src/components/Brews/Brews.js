@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-import BrewList from '../BrewList/BrewList';
-
 class Brews extends Component {
 
     startAgain = () => {
@@ -14,8 +12,8 @@ class Brews extends Component {
         this.props.history.push('/user')
     }
 
-    goToDetails = () => {
-        this.props.history.push('/details');
+    goToDetails = (brewId) => {
+        this.props.history.push(`/details/${brewId}`);
     };
 
     componentDidMount = () => {
@@ -24,16 +22,26 @@ class Brews extends Component {
 
     getUserBrews = () => {
         this.props.dispatch({type: 'GET_BREWS', payload: this.props.match.params.id});
+        console.log(this.props.store.brew);
     }
 
     render() {
         return (
             <>
                 <button onClick={this.accountDetails}>Account Details</button>
+                
                 <h1>Your brews</h1>
+                
                 <ul>
-                    <BrewList goToDetails={this.goToDetails}/>
+                    {this.props.store.brew.map(brew => {
+                        return <li onClick={() => this.goToDetails(brew.id)}>
+                            <div>
+                                <p>{brew.origin}</p>
+                            </div>
+                        </li>
+                    })}
                 </ul>
+
                 <button onClick={this.startAgain}>Start new brew</button>
             </>
         )

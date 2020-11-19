@@ -17,4 +17,15 @@ router.get('/:id', (req, res) => {
         });
 });  
 
+router.get('/details/:id', (req, res) => {
+    const queryText = 'SELECT * FROM "brews" WHERE "id" = $1';
+    pool.query(queryText, [req.params.id])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(error => {
+            res.sendStatus(500);
+            console.log('error in GET', error);
+        });
+});  
+
 module.exports = router;

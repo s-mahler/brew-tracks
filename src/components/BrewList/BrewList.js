@@ -7,7 +7,10 @@ class BrewList extends Component {
     render() {
         return (
             <>
-                <li onClick={this.props.goToDetails}>Brews go here <button>Delete</button></li>
+                {/* {brewsArray.map(brew => {
+                    return <li onClick={this.props.goToDetails}>Brews go here <button>Delete</button></li>
+                })} */}
+                    
             </>
         )
     }

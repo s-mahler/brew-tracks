@@ -125,7 +125,7 @@ class App extends Component {
 
             <ProtectedRoute
               exaxt
-              path="/details"
+              path="/details/:id"
               component={BrewDetails}
             />
 
