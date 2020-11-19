@@ -24,12 +24,9 @@ import Timer from '../Timer/Timer';
 import TastingNotes from '../TastingNotes/TastingNotes';
 import Brews from '../Brews/Brews';
 import BrewDetails from '../BrewDetails/BrewDetails';
+import Admin from '../Admin/Admin';
 
 import './App.css';
-
-
-
-
 
 class App extends Component {
   componentDidMount() {
@@ -102,6 +99,7 @@ class App extends Component {
               authRedirect="/user"
             />
 
+            {/* Will neeed to remove the authRedirect once auth is set up */}
             <ProtectedRoute
               exaxt
               path="/specs"
@@ -134,6 +132,13 @@ class App extends Component {
               exaxt
               path="/details"
               component={BrewDetails}
+              authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              exaxt
+              path="/admin"
+              component={Admin}
               authRedirect="/user"
             />
 

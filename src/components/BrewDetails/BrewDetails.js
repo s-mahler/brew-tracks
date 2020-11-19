@@ -11,6 +11,7 @@ class BrewDetails extends Component {
     render() {
         return (
             <>
+                <button>Edit</button>
                 <h1>Brew Details</h1>
                 <p>Will be populated from DB</p>
                 <button onClick={this.goBack}>Back</button>

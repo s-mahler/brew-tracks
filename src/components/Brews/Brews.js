@@ -10,6 +10,10 @@ class Brews extends Component {
         this.props.history.push('/specs')
     }
 
+    accountDetails = () => {
+        this.props.history.push('/user')
+    }
+
     goToDetails = () => {
         this.props.history.push('/details');
     };
@@ -17,7 +21,7 @@ class Brews extends Component {
     render() {
         return (
             <>
-                <button>Account Details</button>
+                <button onClick={this.accountDetails}>Account Details</button>
                 <h1>Your brews</h1>
                 <ul>
                     <BrewList goToDetails={this.goToDetails}/>
