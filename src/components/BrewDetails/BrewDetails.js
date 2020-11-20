@@ -5,8 +5,6 @@ import './BrewDetails.css';
 
 class BrewDetails extends Component {
 
-    // TO DO STILL
-    // GET for times
 
     state = {
         toggle: true
@@ -82,6 +80,7 @@ class BrewDetails extends Component {
                                 </div>
                             </div>
                     })}
+                    <h1>Phases</h1>
                     {this.props.store.times.map(time => {
                         return <div key={time.id} className='specs'>
                                     {time.minutes} : {time.seconds} : {time.centiseconds}
