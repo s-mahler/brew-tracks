@@ -17,7 +17,8 @@ class Timer extends Component {
     }
 
     brewComplete = () => {
-        this.props.history.push('/tasting')
+        this.props.dispatch({type: 'ADD_TIMES', payload: this.state.lapArray})
+        this.props.history.push('/tasting');
     }
 
     startTimer = () => {
@@ -41,16 +42,18 @@ class Timer extends Component {
     }
 
     stopTimer = () => {
-        this.setState({
-            on: false
-        });
-        clearInterval(this.timer);
+        if (this.state.on) {
+            this.state.lapArray.push(this.state.timerMath);
+            this.setState({
+                on: false
+            });
+            clearInterval(this.timer);
+        }
     }
 
     setLap = () =>{
         if (this.state.on) {
             this.state.lapArray.push(this.state.timerMath)
-            console.log(this.state.lapArray);
         }
     }
 
