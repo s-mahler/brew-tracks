@@ -1,6 +1,15 @@
 import axios from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 
+function* getAllBrews() {
+    try {
+        const brews = yield axios.get('/api/brew');
+        yield put({type: 'SET_BREW', payload: brews.data});
+    } catch (error) {
+        console.log('GET all brews failed', error);
+    }
+}
+
 function* getBrews(action) {
     try {
         const brews = yield axios.get(`/api/brew/${action.payload}`);
@@ -19,6 +28,15 @@ function* getSpecificBrew(action) {
     }
 }
 
+function* getTimes(action) {
+    try {
+        const times = yield axios.get(`/api/brew/times/${action.payload}`);
+        yield put({type: 'SET_TIMES', payload: times.data});
+    } catch (error) {
+        console.log('Times GET failed', error);
+    }
+}
+
 function* addBrew(action) {
     console.log(action.payload);
     try {
@@ -28,10 +46,21 @@ function* addBrew(action) {
     }
 }
 
+function* addTimes(action) {
+    try {
+        yield axios.post('/api/brew/times', action.payload);
+    } catch (error) {
+        console.log('Times POST failed', error);
+    }
+}
+
 function* brewSaga() {
+    yield takeEvery('GET_ALL_BREWS', getAllBrews)
     yield takeEvery('GET_BREWS', getBrews);
     yield takeEvery('GET_SPECIFIC_BREW', getSpecificBrew);
+    yield takeEvery('GET_TIMES', getTimes);
     yield takeEvery('ADD_BREW', addBrew);
+    yield takeEvery('POST_TIMES', addTimes);
 }
 
 export default brewSaga;

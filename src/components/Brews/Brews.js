@@ -22,7 +22,6 @@ class Brews extends Component {
 
     getUserBrews = () => {
         this.props.dispatch({type: 'GET_BREWS', payload: this.props.match.params.id});
-        console.log(this.props.store.brew);
     }
 
     render() {

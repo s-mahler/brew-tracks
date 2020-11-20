@@ -6,6 +6,7 @@ class BrewSpecs extends Component {
 
     state = {
         newSpecs:{
+            brew_id: 0,
             method: '',
             roast: '',
             grind: '',
@@ -13,6 +14,14 @@ class BrewSpecs extends Component {
             amount_coffee: '',
             amount_water: ''
         }
+    }
+
+    componentDidMount = () => {
+        this.getAllBrews();
+    }
+
+    getAllBrews = () => {
+        this.props.dispatch({type: 'GET_ALL_BREWS'});
     }
 
     handleSubmit = () => {
@@ -24,6 +33,7 @@ class BrewSpecs extends Component {
         this.setState({
             newSpecs: {
                 ...this.state.newSpecs,
+                brew_id: this.props.store.brew[this.props.store.brew.length - 1].id + 1,
                 [eventType]: event.target.value
             }
         });

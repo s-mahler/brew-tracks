@@ -13,9 +13,9 @@ class TastingNotes extends Component {
         }
     }
 
-
     handleSubmit = () => {
-        this.props.dispatch({type: 'ADD_BREW', payload: this.props.store.inputs})
+        this.props.dispatch({type: 'ADD_BREW', payload: this.props.store.inputs});
+        this.props.dispatch({type: 'POST_TIMES', payload: this.props.store.inputs});
         this.props.history.push(`/brews/${this.props.store.user.id}`);
     };
 
