@@ -18,10 +18,15 @@ class BrewDetails extends Component {
 
     componentDidMount = () => {
         this.getSpecificBrew();
+        this.getTimes();
     }
 
     getSpecificBrew = () => {
         this.props.dispatch({type: 'GET_SPECIFIC_BREW', payload: this.props.match.params.id});
+    }
+
+    getTimes = () => {
+        this.props.dispatch({type: 'GET_TIMES', payload: this.props.match.params.id})
     }
 
     toggleView = () => {
@@ -76,6 +81,11 @@ class BrewDetails extends Component {
                                     <p>{brew.mouth_feel}</p>
                                 </div>
                             </div>
+                    })}
+                    {this.props.store.times.map(time => {
+                        return <div key={time.id} className='specs'>
+                                    {time.minutes} : {time.seconds} : {time.centiseconds}
+                                </div>
                     })}
                     </>
 
