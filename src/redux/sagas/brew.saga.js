@@ -19,9 +19,19 @@ function* getSpecificBrew(action) {
     }
 }
 
+function* addBrew(action) {
+    console.log(action.payload);
+    try {
+        yield axios.post(`/api/brew`, action.payload);
+    } catch (error) {
+        console.log('Brew POST failed', error)
+    }
+}
+
 function* brewSaga() {
     yield takeEvery('GET_BREWS', getBrews);
     yield takeEvery('GET_SPECIFIC_BREW', getSpecificBrew);
+    yield takeEvery('ADD_BREW', addBrew);
 }
 
 export default brewSaga;

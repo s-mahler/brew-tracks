@@ -25,6 +25,7 @@ import TastingNotes from '../TastingNotes/TastingNotes';
 import Brews from '../Brews/Brews';
 import BrewDetails from '../BrewDetails/BrewDetails';
 import Admin from '../Admin/Admin';
+import ReviewBrew from '../ReviewBrew/ReviewBrew';
 
 import './App.css';
 
@@ -100,39 +101,45 @@ class App extends Component {
 
             {/* Will neeed to modify the authRedirect once auth is set up */}
             <ProtectedRoute
-              exaxt
+              exact
               path="/specs"
               component={BrewSpecs}
             />
 
             <ProtectedRoute
-              exaxt
+              exact
               path="/timer"
               component={Timer}
             />
 
             <ProtectedRoute
-              exaxt
+              exact
               path="/tasting"
               component={TastingNotes}
             />
 
             <ProtectedRoute
-              exaxt
+              exact
               path="/brews/:id"
               component={Brews}
             />
 
             <ProtectedRoute
-              exaxt
+              exact
               path="/details/:id"
               component={BrewDetails}
             />
 
             <ProtectedRoute
-              exaxt
+              exact
               path="/admin"
               component={Admin}
+            />
+
+            <Route
+              exact
+              path="/review"
+              component={ReviewBrew}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

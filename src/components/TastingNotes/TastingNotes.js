@@ -4,9 +4,30 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class TastingNotes extends Component {
 
+    state = {
+        newTasting:{
+            taste: '',
+            aroma: '',
+            body: '',
+            mouth_feel: '',
+        }
+    }
+
+
     handleSubmit = () => {
-        this.props.history.push(`/brews/${this.props.store.user.id}`)
+        this.props.dispatch({type: 'ADD_BREW', payload: this.props.store.inputs})
+        this.props.history.push(`/brews/${this.props.store.user.id}`);
     };
+
+    handleChange = (event, eventType) => {
+        this.setState({
+            newTasting: {
+                ...this.state.newTasting,
+                [eventType]: event.target.value
+            }
+        });
+        this.props.dispatch({type: 'ADD_TASTING', payload: this.state.newTasting});
+    } 
 
     render() {
         return (
@@ -14,16 +35,16 @@ class TastingNotes extends Component {
                 <h1>Tasting Notes</h1>
 
                 <label>Taste:</label>
-                <input></input>
+                <input onChange={(event) => this.handleChange(event, 'taste')}></input>
 
                 <label>Aroma:</label>
-                <input></input>
+                <input onChange={(event) => this.handleChange(event, 'aroma')}></input>
 
                 <label>Body:</label>
-                <input></input>
+                <input onChange={(event) => this.handleChange(event, 'body')}></input>
 
                 <label>Mouth Feel:</label>
-                <input></input>
+                <input onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
 
                 <button onClick={this.handleSubmit}>Finish</button>
             </div>
