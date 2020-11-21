@@ -33,11 +33,18 @@ class BrewDetails extends Component {
         });
     }
 
+    showWarning = () => {
+        if (window.confirm('Warning: this is permanent')) {
+            this.props.dispatch({type: 'DELETE_BREW', payload: this.props.match.params.id});
+            this.props.dispatch({type: 'DELETE_TIMES', payload: this.props.match.params.id});
+            this.props.history.push(`/brews/${this.props.store.user.id}`)
+        };
+    }
+
     render() {
         return (
             <>
-
-
+            <button onClick={this.showWarning}>DELETE</button>
                 {this.state.toggle ? (
 
                 <>
@@ -82,8 +89,10 @@ class BrewDetails extends Component {
                     })}
                     <h1>Phases</h1>
                     {this.props.store.times.map(time => {
-                        return <div key={time.id} className='specs'>
-                                    {time.minutes} : {time.seconds} : {time.centiseconds}
+                        return <div key={time.id}>
+                                    <div className="tasting">
+                                        <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                                    </div>
                                 </div>
                     })}
                     </>

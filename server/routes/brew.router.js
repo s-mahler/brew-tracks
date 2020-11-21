@@ -76,7 +76,7 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
             console.log('Error in brew POST', error)
         })
-})
+});
 
 router.post('/times', (req, res) => {
     const queryText = `INSERT INTO "times" ("centiseconds", "seconds", "minutes", "brew_id") 
@@ -91,6 +91,28 @@ router.post('/times', (req, res) => {
             console.log('Error in brew POST', error)
         })
     }
-})
+});
+
+router.delete('/:id', (req,res) => {
+    const queryText = `DELETE FROM "brews" WHERE "id" = $1`
+    pool.query(queryText, [req.params.id])
+        .then(() => {
+            res.sendStatus(200);
+        }).catch(error => {
+            res.sendStatus(500);
+            console.log('error in DELETE brew', error);
+        });
+});
+
+router.delete('/times/:id', (req,res) => {
+    const queryText = `DELETE FROM "times" WHERE "brew_id" = $1`
+    pool.query(queryText, [req.params.id])
+        .then(() => {
+            res.sendStatus(200);
+        }).catch(error => {
+            res.sendStatus(500);
+            console.log('error in DELETE times', error);
+        });
+});
 
 module.exports = router;
