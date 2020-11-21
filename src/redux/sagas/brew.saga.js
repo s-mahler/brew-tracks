@@ -54,6 +54,22 @@ function* addTimes(action) {
     }
 }
 
+function* deleteBrew(action) {
+    try {
+        yield axios.delete(`/api/brew/${action.payload}`);
+    } catch (error) {
+        console.log('Brew DELETE failed', error);
+    }
+}
+
+function* deleteTimes(action) {
+    try {
+        yield axios.delete(`/api/brew/times/${action.payload}`);
+    } catch (error) {
+        console.log('Times DELETE failed', error);
+    }
+}
+
 function* brewSaga() {
     yield takeEvery('GET_ALL_BREWS', getAllBrews)
     yield takeEvery('GET_BREWS', getBrews);
@@ -61,6 +77,8 @@ function* brewSaga() {
     yield takeEvery('GET_TIMES', getTimes);
     yield takeEvery('ADD_BREW', addBrew);
     yield takeEvery('POST_TIMES', addTimes);
+    yield takeEvery('DELETE_BREW', deleteBrew);
+    yield takeEvery('DELETE_TIMES', deleteTimes);
 }
 
 export default brewSaga;
