@@ -37,6 +37,7 @@ class BrewDetails extends Component {
         if (window.confirm('Warning: this is permanent')) {
             this.props.dispatch({type: 'DELETE_BREW', payload: this.props.match.params.id});
             this.props.dispatch({type: 'DELETE_TIMES', payload: this.props.match.params.id});
+            this.props.history.push(`/brews/${this.props.store.user.id}`)
         };
     }
 

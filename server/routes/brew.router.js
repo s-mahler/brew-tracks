@@ -94,13 +94,13 @@ router.post('/times', (req, res) => {
 });
 
 router.delete('/:id', (req,res) => {
-    const queryText = `DELETE FROM "brews" WHERE "brew_id" = $1`
+    const queryText = `DELETE FROM "brews" WHERE "id" = $1`
     pool.query(queryText, [req.params.id])
         .then(() => {
             res.sendStatus(200);
         }).catch(error => {
             res.sendStatus(500);
-            console.log('error in DELETE', error);
+            console.log('error in DELETE brew', error);
         });
 });
 
@@ -111,7 +111,7 @@ router.delete('/times/:id', (req,res) => {
             res.sendStatus(200);
         }).catch(error => {
             res.sendStatus(500);
-            console.log('error in DELETE', error);
+            console.log('error in DELETE times', error);
         });
 });
 
