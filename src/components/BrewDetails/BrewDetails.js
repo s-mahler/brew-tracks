@@ -9,6 +9,7 @@ class BrewDetails extends Component {
     state = {
         toggle: true,
         brewEdit: {
+            id: 0,
             method: '',
             roast: '',
             grind: '',
@@ -39,10 +40,18 @@ class BrewDetails extends Component {
         this.props.dispatch({type: 'GET_TIMES', payload: this.props.match.params.id})
     }
 
+    putBrew = () => {
+        this.setState({
+            toggle: !this.state.toggle,
+        });
+        this.props.dispatch({type: 'PUT_BREW', payload: this.state.brewEdit})
+    }
+
     toggleView = () => {
         this.setState({
             toggle: !this.state.toggle,
             brewEdit: {
+                id: this.props.store.brew[0].id,
                 method: this.props.store.brew[0].brew_method,
                 roast: this.props.store.brew[0].roast,
                 grind: this.props.store.brew[0].grind,
@@ -134,7 +143,7 @@ class BrewDetails extends Component {
                 ) : (
 
                     <div>
-                        <button onClick={this.toggleView}>Save</button>
+                        <button onClick={this.putBrew}>Save</button>
                         <h1>Brew Details</h1>
                                         <div className="specs">
                                             <label>Method:</label>
