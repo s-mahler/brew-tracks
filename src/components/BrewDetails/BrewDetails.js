@@ -86,8 +86,15 @@ class BrewDetails extends Component {
         });
     }
 
-    handleTimeChange = (event, eventType) => {
+    handleTimeChange = (event, eventType, timeId) => {
         console.log(this.state.timesEdit);
+        for (let i = 0; i < this.state.timesEdit; i++) {
+            if (timeId === this.state.timesEdit[i].id) {
+                this.setState({
+                    timesEdit: ';'
+                })
+            }
+        }
     }
 
     render() {
@@ -140,7 +147,7 @@ class BrewDetails extends Component {
                     {this.props.store.times.map(time => {
                         return <div key={time.id}>
                                     <div className="tasting">
-                                        <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                                        <p>{time.minutes} : {time.seconds}</p>
                                     </div>
                                 </div>
                     })}
@@ -184,11 +191,16 @@ class BrewDetails extends Component {
                                             <label>Mouth Feel:</label>
                                             <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
                                         </div>
-                                        {this.props.store.times.map(time => {
+                                        {this.props.store.times.map((time) => {
                                             return <div key={time.id}>
                                                         <div className="tasting">
-                                                            <input></input>
-                                                            <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+
+                                                            <label> Minutes:</label>
+                                                            <input value={time.minutes} onChange={(event) => this.handleTimeChange(event, 'minutes', time.id)}></input>
+
+                                                            <label>Seconds:</label>
+                                                            <input value={time.seconds} onChange={(event) => this.handleTimeChange(event, 'seconds', time.id)}></input>
+
                                                         </div>
                                 </div>
                     })}
