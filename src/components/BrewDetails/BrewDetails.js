@@ -20,7 +20,8 @@ class BrewDetails extends Component {
             aroma: '',
             body: '',
             mouth_feel: ''
-        }
+        },
+        timesEdit: []
     }
 
     goBack = () => {
@@ -62,7 +63,8 @@ class BrewDetails extends Component {
                 aroma: this.props.store.brew[0].aroma,
                 body: this.props.store.brew[0].body,
                 mouth_feel: this.props.store.brew[0].mouth_feel
-            }
+            },
+            timesEdit: this.props.store.times
         });
     }
 
@@ -82,6 +84,10 @@ class BrewDetails extends Component {
                 [eventType]: event.target.value
             }
         });
+    }
+
+    handleTimeChange = (event, eventType) => {
+        console.log(this.state.timesEdit);
     }
 
     render() {
@@ -178,7 +184,16 @@ class BrewDetails extends Component {
                                             <label>Mouth Feel:</label>
                                             <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
                                         </div>
+                                        {this.props.store.times.map(time => {
+                                            return <div key={time.id}>
+                                                        <div className="tasting">
+                                                            <input></input>
+                                                            <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                                                        </div>
                                 </div>
+                    })}
+                                </div>
+
                 )}
                 <button onClick={this.goBack}>Back</button>
             </>
