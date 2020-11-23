@@ -62,6 +62,7 @@ class Timer extends Component {
         this.setState({
           timeStart: 0,
           timeNow: 0,
+          lapArray: [],
           timerMath: {
             centiseconds: "00",
             seconds: "00",
@@ -78,6 +79,11 @@ class Timer extends Component {
             <button onClick={this.setLap}>Lap</button>
             <button onClick={this.stopTimer}>Stop</button>
             <button onClick={this.resetTimer}>Reset</button>
+            {this.state.lapArray.map((time, index) => {
+                return <div key={index}>
+                    <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                </div>
+            })}
 
             <br/>
             <br/>

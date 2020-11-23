@@ -41,6 +41,7 @@ function* addBrew(action) {
     console.log(action.payload);
     try {
         yield axios.post(`/api/brew`, action.payload);
+        yield put({type: 'GET_BREWS', payload: action.payload.specs.user_id});
     } catch (error) {
         console.log('Brew POST failed', error)
     }
@@ -56,8 +57,8 @@ function* addTimes(action) {
 
 function* deleteBrew(action) {
     try {
-        yield axios.delete(`/api/brew/${action.payload}`);
-        yield put({type: 'GET_SPECIFIC_BREW', payload: action.payload.id});
+        yield axios.delete(`/api/brew/${action.payload.brew_id}`);
+        yield put({type: 'GET_BREWS', payload: action.payload.user_id});
     } catch (error) {
         console.log('Brew DELETE failed', error);
     }

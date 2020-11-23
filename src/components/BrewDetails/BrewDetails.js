@@ -34,6 +34,7 @@ class BrewDetails extends Component {
     }
 
     getSpecificBrew = () => {
+        console.log(this.props);
         this.props.dispatch({type: 'GET_SPECIFIC_BREW', payload: this.props.match.params.id});
     }
 
@@ -71,7 +72,7 @@ class BrewDetails extends Component {
 
     showWarning = () => {
         if (window.confirm('Warning: this is permanent')) {
-            this.props.dispatch({type: 'DELETE_BREW', payload: this.props.match.params.id});
+            this.props.dispatch({type: 'DELETE_BREW', payload: {brew_id: this.props.match.params.id, user_id: this.props.store.user.id}});
             this.props.dispatch({type: 'DELETE_TIMES', payload: this.props.match.params.id});
             this.props.history.push(`/brews/${this.props.store.user.id}`)
         };
@@ -113,9 +114,12 @@ class BrewDetails extends Component {
                 <>
                 <button onClick={this.toggleView}>Edit</button>
                 <h1>Brew Details</h1>
+                <div>
                 {this.props.store.brew.map(brew => {
-                    return <div key={brew.id}>
-                                <div className="specs">
+                    return <div className='container' key={brew.id}>
+                                <div className="brew">
+                                    <h3>Specifications</h3>
+
                                     <label>Method:</label>
                                     <p>{brew.brew_method}</p>
 
@@ -135,7 +139,9 @@ class BrewDetails extends Component {
                                     <p>{brew.water_amount}</p>
                                 </div>
 
-                                <div className="tasting">
+                                <div className="brew">
+                                    <h3>Tasting Notes</h3>
+
                                     <label>Aroma:</label>
                                     <p>{brew.aroma}</p>
 
@@ -150,14 +156,19 @@ class BrewDetails extends Component {
                                 </div>
                             </div>
                     })}
+                    </div>
                     <h1>Phases</h1>
+                    <ul className="brew">
                     {this.props.store.times.map(time => {
-                        return <div key={time.id}>
-                                    <div className="tasting">
-                                        <p>{time.minutes} : {time.seconds}</p>
+                        return <li key={time.id}>
+                                    <div >
+                                        <p>{time.minutes} minutes</p> 
+                                    
+                                        <p>{time.seconds} seconds</p>
                                     </div>
-                                </div>
+                                </li>
                     })}
+                    </ul>
                     </>
 
                 ) : (
@@ -165,53 +176,57 @@ class BrewDetails extends Component {
                     <div>
                         <button onClick={this.putBrew}>Save</button>
                         <h1>Brew Details</h1>
-                                        <div className="specs">
-                                            <label>Method:</label>
-                                            <input value={this.state.brewEdit.method} onChange={(event) => this.handleChange(event, 'method')}></input>
+                        <div className="container">
+                            <div className="brew">
+                                <label>Method:</label>
+                                <input value={this.state.brewEdit.method} onChange={(event) => this.handleChange(event, 'method')}></input>
 
-                                            <label>Origin:</label>
-                                            <input value={this.state.brewEdit.origin} onChange={(event) => this.handleChange(event, 'origin')}></input>
+                                <label>Origin:</label>
+                                <input value={this.state.brewEdit.origin} onChange={(event) => this.handleChange(event, 'origin')}></input>
 
-                                            <label>Roast:</label>
-                                            <input value={this.state.brewEdit.roast} onChange={(event) => this.handleChange(event, 'roast')}></input>
+                                <label>Roast:</label>
+                                <input value={this.state.brewEdit.roast} onChange={(event) => this.handleChange(event, 'roast')}></input>
 
-                                            <label>Grind:</label>
-                                            <input value={this.state.brewEdit.grind} onChange={(event) => this.handleChange(event, 'grind')}></input>
+                                <label>Grind:</label>
+                                <input value={this.state.brewEdit.grind} onChange={(event) => this.handleChange(event, 'grind')}></input>
 
-                                            <label>Amount of Coffee:</label>
-                                            <input value={this.state.brewEdit.amount_coffee} onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
+                                <label>Amount of Coffee:</label>
+                                <input value={this.state.brewEdit.amount_coffee} onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
 
-                                            <label>Amount of Water:</label>
-                                            <input value={this.state.brewEdit.amount_water} onChange={(event) => this.handleChange(event, 'amount_water')}></input>
-                                        </div>
+                                <label>Amount of Water:</label>
+                                <input value={this.state.brewEdit.amount_water} onChange={(event) => this.handleChange(event, 'amount_water')}></input>
+                            </div>
 
-                                        <div className="tasting">
-                                            <label>Aroma:</label>
-                                            <input value={this.state.brewEdit.aroma} onChange={(event) => this.handleChange(event, 'aroma')}></input>
+                            <div className="brew">
+                                <label>Aroma:</label>
+                                <input value={this.state.brewEdit.aroma} onChange={(event) => this.handleChange(event, 'aroma')}></input>
 
-                                            <label>Taste:</label>
-                                            <input value={this.state.brewEdit.taste} onChange={(event) => this.handleChange(event, 'taste')}></input>
+                                <label>Taste:</label>
+                                <input value={this.state.brewEdit.taste} onChange={(event) => this.handleChange(event, 'taste')}></input>
 
-                                            <label>Body:</label>
-                                            <input value={this.state.brewEdit.body} onChange={(event) => this.handleChange(event, 'body')}></input>
+                                <label>Body:</label>
+                                <input value={this.state.brewEdit.body} onChange={(event) => this.handleChange(event, 'body')}></input>
 
-                                            <label>Mouth Feel:</label>
-                                            <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
-                                        </div>
-                                        {this.state.timesEdit.map((time) => {
-                                            return <div key={time.id}>
-                                                        <div className="tasting">
+                                <label>Mouth Feel:</label>
+                                <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
+                            </div>
+                        </div>
+                            <ul className="brew">
+                                {this.state.timesEdit.map((time) => {
+                                    return <li key={time.id}>
+                                                <div className="times">
 
-                                                            <label> Minutes:</label>
-                                                            <input type='number' value={time.minutes} onChange={(event) => this.handleTimeChange(event, 'minutes', time.id)}></input>
+                                                    <label> Minutes:</label>
+                                                    <input type='number' value={time.minutes} onChange={(event) => this.handleTimeChange(event, 'minutes', time.id)}></input>
 
-                                                            <label>Seconds:</label>
-                                                            <input type='number' value={time.seconds} onChange={(event) => this.handleTimeChange(event, 'seconds', time.id)}></input>
+                                                    <label>Seconds:</label>
+                                                    <input type='number' value={time.seconds} onChange={(event) => this.handleTimeChange(event, 'seconds', time.id)}></input>
 
-                                                        </div>
-                                </div>
-                    })}
-                                </div>
+                                                </div>
+                                            </li>
+                                })}
+                            </ul>
+                        </div>
 
                 )}
                 <button onClick={this.goBack}>Back</button>
