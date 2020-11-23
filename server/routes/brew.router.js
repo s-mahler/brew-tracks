@@ -137,6 +137,20 @@ router.put('/', (req, res) => {
             res.sendStatus(500);
             console.log('error in PUT brew', error);
         });
-})
+});
+
+router.put('/times', (req, res) => {
+    console.log(req.body);
+    const queryText = `UPDATE "times" SET "seconds" = $1, "minutes" = $2 WHERE "id" = $3`
+    for (let i = 0; i < req.body.length; i++) {
+        pool.query(queryText, [req.body[i].seconds, req.body[i].minutes, req.body[i].id])
+            .then(() => {
+                res.sendStatus(200);
+            }).catch((error) => {
+                res.sendStatus(500);
+                console.log('error in PUT times', error);
+            });
+    }
+});
 
 module.exports = router;
