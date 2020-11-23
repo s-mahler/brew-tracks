@@ -157,7 +157,7 @@ class BrewDetails extends Component {
                     })}
                     </div>
                     <h1>Phases</h1>
-                    <ul className="tasting">
+                    <ul className="brew">
                     {this.props.store.times.map(time => {
                         return <li key={time.id}>
                                     <div >
@@ -175,7 +175,8 @@ class BrewDetails extends Component {
                     <div>
                         <button onClick={this.putBrew}>Save</button>
                         <h1>Brew Details</h1>
-                            <div className="specs">
+                        <div className="container">
+                            <div className="brew">
                                 <label>Method:</label>
                                 <input value={this.state.brewEdit.method} onChange={(event) => this.handleChange(event, 'method')}></input>
 
@@ -195,7 +196,7 @@ class BrewDetails extends Component {
                                 <input value={this.state.brewEdit.amount_water} onChange={(event) => this.handleChange(event, 'amount_water')}></input>
                             </div>
 
-                            <div className="tasting">
+                            <div className="brew">
                                 <label>Aroma:</label>
                                 <input value={this.state.brewEdit.aroma} onChange={(event) => this.handleChange(event, 'aroma')}></input>
 
@@ -208,9 +209,11 @@ class BrewDetails extends Component {
                                 <label>Mouth Feel:</label>
                                 <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
                             </div>
+                        </div>
+                            <ul className="brew">
                                 {this.state.timesEdit.map((time) => {
-                                    return <div key={time.id}>
-                                                <div className="tasting">
+                                    return <li key={time.id}>
+                                                <div className="times">
 
                                                     <label> Minutes:</label>
                                                     <input type='number' value={time.minutes} onChange={(event) => this.handleTimeChange(event, 'minutes', time.id)}></input>
@@ -219,8 +222,9 @@ class BrewDetails extends Component {
                                                     <input type='number' value={time.seconds} onChange={(event) => this.handleTimeChange(event, 'seconds', time.id)}></input>
 
                                                 </div>
-                                            </div>
+                                            </li>
                                 })}
+                            </ul>
                         </div>
 
                 )}

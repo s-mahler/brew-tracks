@@ -31,7 +31,7 @@ class TastingNotes extends Component {
 
     render() {
         return (
-            <div className="formPanel tasting">
+            <div className="formPanel brew">
                 <h1>Tasting Notes</h1>
 
                 <label>Taste:</label>

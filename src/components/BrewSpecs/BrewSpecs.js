@@ -41,7 +41,7 @@ class BrewSpecs extends Component {
 
     render() {
         return (
-            <div className="formPanel specs">
+            <div className="formPanel brew">
                 <h1>Brew Specifications</h1>
 
                 <label>Method:</label>
