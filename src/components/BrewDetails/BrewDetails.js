@@ -7,7 +7,21 @@ class BrewDetails extends Component {
 
 
     state = {
-        toggle: true
+        toggle: true,
+        brewEdit: {
+            id: 0,
+            method: '',
+            roast: '',
+            grind: '',
+            origin: '',
+            amount_coffee: '',
+            amount_water: '',
+            taste: '',
+            aroma: '',
+            body: '',
+            mouth_feel: ''
+        },
+        timesEdit: []
     }
 
     goBack = () => {
@@ -27,9 +41,31 @@ class BrewDetails extends Component {
         this.props.dispatch({type: 'GET_TIMES', payload: this.props.match.params.id})
     }
 
+    putBrew = () => {
+        this.setState({
+            toggle: !this.state.toggle,
+        });
+        this.props.dispatch({type: 'PUT_BREW', payload: this.state.brewEdit});
+        this.props.dispatch({type: 'PUT_TIMES', payload: this.state.timesEdit});
+    }
+
     toggleView = () => {
         this.setState({
             toggle: !this.state.toggle,
+            brewEdit: {
+                id: this.props.store.brew[0].id,
+                method: this.props.store.brew[0].brew_method,
+                roast: this.props.store.brew[0].roast,
+                grind: this.props.store.brew[0].grind,
+                origin: this.props.store.brew[0].origin,
+                amount_coffee: this.props.store.brew[0].coffee_amount,
+                amount_water: this.props.store.brew[0].water_amount,
+                taste: this.props.store.brew[0].taste,
+                aroma: this.props.store.brew[0].aroma,
+                body: this.props.store.brew[0].body,
+                mouth_feel: this.props.store.brew[0].mouth_feel
+            },
+            timesEdit: this.props.store.times
         });
     }
 
@@ -39,6 +75,33 @@ class BrewDetails extends Component {
             this.props.dispatch({type: 'DELETE_TIMES', payload: this.props.match.params.id});
             this.props.history.push(`/brews/${this.props.store.user.id}`)
         };
+    }
+
+    handleChange = (event, eventType) => {
+        console.log(this.state.brewEdit);
+        this.setState({
+            brewEdit: {
+                ...this.state.brewEdit,
+                [eventType]: event.target.value
+            }
+        });
+    }
+
+    handleTimeChange = (event, eventType, timeId) => {
+        console.log(this.state.timesEdit);
+        let timesArray = this.state.timesEdit;
+        for (let i = 0; i < timesArray.length; i++) {
+            if (timeId === timesArray[i].id) {
+                if (eventType === 'seconds') {
+                    timesArray[i].seconds = event.target.value;
+                } else if (eventType === 'minutes') {
+                    timesArray[i].minutes = event.target.value;
+                }
+            }
+        }
+        this.setState({
+            timesEdit: timesArray
+        })
     }
 
     render() {
@@ -91,7 +154,7 @@ class BrewDetails extends Component {
                     {this.props.store.times.map(time => {
                         return <div key={time.id}>
                                     <div className="tasting">
-                                        <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                                        <p>{time.minutes} : {time.seconds}</p>
                                     </div>
                                 </div>
                     })}
@@ -100,42 +163,55 @@ class BrewDetails extends Component {
                 ) : (
 
                     <div>
-                        <button onClick={this.toggleView}>Save</button>
+                        <button onClick={this.putBrew}>Save</button>
                         <h1>Brew Details</h1>
-                        <div className="specs">
-                                    <label>Method:</label>
-                                    <input></input>
+                                        <div className="specs">
+                                            <label>Method:</label>
+                                            <input value={this.state.brewEdit.method} onChange={(event) => this.handleChange(event, 'method')}></input>
 
-                                    <label>Origin:</label>
-                                    <input></input>
+                                            <label>Origin:</label>
+                                            <input value={this.state.brewEdit.origin} onChange={(event) => this.handleChange(event, 'origin')}></input>
 
-                                    <label>Roast:</label>
-                                    <input></input>
+                                            <label>Roast:</label>
+                                            <input value={this.state.brewEdit.roast} onChange={(event) => this.handleChange(event, 'roast')}></input>
 
-                                    <label>Grind:</label>
-                                    <input></input>
+                                            <label>Grind:</label>
+                                            <input value={this.state.brewEdit.grind} onChange={(event) => this.handleChange(event, 'grind')}></input>
 
-                                    <label>Amount of Coffee:</label>
-                                    <input></input>
+                                            <label>Amount of Coffee:</label>
+                                            <input value={this.state.brewEdit.amount_coffee} onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
 
-                                    <label>Amount of Water:</label>
-                                    <input></input>
+                                            <label>Amount of Water:</label>
+                                            <input value={this.state.brewEdit.amount_water} onChange={(event) => this.handleChange(event, 'amount_water')}></input>
+                                        </div>
+
+                                        <div className="tasting">
+                                            <label>Aroma:</label>
+                                            <input value={this.state.brewEdit.aroma} onChange={(event) => this.handleChange(event, 'aroma')}></input>
+
+                                            <label>Taste:</label>
+                                            <input value={this.state.brewEdit.taste} onChange={(event) => this.handleChange(event, 'taste')}></input>
+
+                                            <label>Body:</label>
+                                            <input value={this.state.brewEdit.body} onChange={(event) => this.handleChange(event, 'body')}></input>
+
+                                            <label>Mouth Feel:</label>
+                                            <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
+                                        </div>
+                                        {this.state.timesEdit.map((time) => {
+                                            return <div key={time.id}>
+                                                        <div className="tasting">
+
+                                                            <label> Minutes:</label>
+                                                            <input type='number' value={time.minutes} onChange={(event) => this.handleTimeChange(event, 'minutes', time.id)}></input>
+
+                                                            <label>Seconds:</label>
+                                                            <input type='number' value={time.seconds} onChange={(event) => this.handleTimeChange(event, 'seconds', time.id)}></input>
+
+                                                        </div>
                                 </div>
-
-                                <div className="tasting">
-                                    <label>Aroma:</label>
-                                    <input></input>
-
-                                    <label>Taste:</label>
-                                    <input></input>
-
-                                    <label>Body:</label>
-                                    <input></input>
-
-                                    <label>Mouth Feel:</label>
-                                    <input></input>
+                    })}
                                 </div>
-                    </div>
 
                 )}
                 <button onClick={this.goBack}>Back</button>
