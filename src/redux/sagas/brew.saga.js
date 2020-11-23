@@ -89,6 +89,14 @@ function* putTimes(action) {
     }
 }
 
+function* putTimesId(action) {
+    try {
+        yield axios.put('/api/brew/timesId', action.payload);
+    } catch (error) {
+        console.log('Times PUT failed', error);
+    }
+}
+
 function* brewSaga() {
     yield takeEvery('GET_ALL_BREWS', getAllBrews)
     yield takeEvery('GET_BREWS', getBrews);
@@ -100,6 +108,7 @@ function* brewSaga() {
     yield takeEvery('DELETE_TIMES', deleteTimes);
     yield takeEvery('PUT_BREW', putBrew);
     yield takeEvery('PUT_TIMES', putTimes);
+    yield takeEvery('PUT_TIMES_ID', putTimesId);
 }
 
 export default brewSaga;

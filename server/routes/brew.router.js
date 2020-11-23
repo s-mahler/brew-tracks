@@ -78,11 +78,11 @@ router.post('/', (req, res) => {
 });
 
 router.post('/times', (req, res) => {
-    const queryText = `INSERT INTO "times" ("centiseconds", "seconds", "minutes", "brew_id") 
-                        VALUES ($1, $2, $3, $4);`;
+    const queryText = `INSERT INTO "times" ("centiseconds", "seconds", "minutes") 
+                        VALUES ($1, $2, $3);`;
     const time = req.body.times;
     for (let i = 0; i < time.length; i++) {
-        pool.query(queryText, [time[i].centiseconds, time[i].seconds, time[i].minutes, req.body.specs.brew_id])
+        pool.query(queryText, [time[i].centiseconds, time[i].seconds, time[i].minutes])
         .then(() => {
             res.sendStatus(200);
         }).catch((error) => {
@@ -116,7 +116,7 @@ router.delete('/times/:id', (req,res) => {
 
 router.put('/', (req, res) => {
     const brewEdit = req.body;
-    const queryText = `UPDATE "brews" SET "origin" = $1, "roast" = $2, "grind" = $3, "coffee_amount" = $4, "water_amount" = $5, "brew_method" = $6, "taste" = $7, "aroma" = $8, "body" = $9, "mouth_feel" = $10 WHERE "id" = $11;`
+    const queryText = `UPDATE "brews" SET "origin" = $1, "roast" = $2, "grind" = $3, "coffee_amount" = $4, "water_amount" = $5, "brew_method" = $6, "taste" = $7, "aroma" = $8, "body" = $9, "mouth_feel" = $10 WHERE "id" = $11;`;
     const queryValues = [
         brewEdit.origin,
         brewEdit.roast,
@@ -140,8 +140,7 @@ router.put('/', (req, res) => {
 });
 
 router.put('/times', (req, res) => {
-    console.log(req.body);
-    const queryText = `UPDATE "times" SET "seconds" = $1, "minutes" = $2 WHERE "id" = $3`
+    const queryText = `UPDATE "times" SET "seconds" = $1, "minutes" = $2 WHERE "id" = $3;`;
     for (let i = 0; i < req.body.length; i++) {
         pool.query(queryText, [req.body[i].seconds, req.body[i].minutes, req.body[i].id])
             .then(() => {
@@ -151,6 +150,18 @@ router.put('/times', (req, res) => {
                 console.log('error in PUT times', error);
             });
     }
+});
+
+router.put('/timesId', (req, res) => {
+    console.log(req.body);
+    const queryText = `UPDATE "times" SET "brew_id" = $1 where "brew_id" IS NULL;`;
+    pool.query(queryText, [req.body.brew_id])
+        .then(() => {
+            res.sendStatus(200);
+         }).catch((error) => {
+            res.sendStatus(500);
+            console.log("error in PUT times' brew ID", error);
+         });
 });
 
 module.exports = router;
