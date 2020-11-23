@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class LoginForm extends Component {
@@ -19,6 +20,7 @@ class LoginForm extends Component {
           password: this.state.password,
         },
       });
+      this.props.history.push('/home');
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -30,12 +32,12 @@ class LoginForm extends Component {
     });
   };
 
+
   render() {
     return (
 
       // Need to have conditional for different form buttons at end
       // And toggle to show button to review recipes
-      
       <form className="formPanel" onSubmit={this.login}>
         <h2>Login</h2>
         {this.props.store.errors.loginMessage && (
@@ -69,11 +71,10 @@ class LoginForm extends Component {
         </div>
         <div>
           <input className="btn" type="submit" name="submit" value="Log In" />
-          <input className="btn" type="submit" name="submit" value="Register" />
         </div>
       </form>
     );
   }
 }
 
-export default connect(mapStoreToProps)(LoginForm);
+export default withRouter(connect(mapStoreToProps)(LoginForm));

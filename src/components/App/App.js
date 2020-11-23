@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -25,7 +26,6 @@ import TastingNotes from '../TastingNotes/TastingNotes';
 import Brews from '../Brews/Brews';
 import BrewDetails from '../BrewDetails/BrewDetails';
 import Admin from '../Admin/Admin';
-import ReviewBrew from '../ReviewBrew/ReviewBrew';
 
 import './App.css';
 
@@ -42,7 +42,7 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
+ 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
               // shows AboutPage at all times (logged in or not)
@@ -100,19 +100,19 @@ class App extends Component {
             />
 
             {/* Will neeed to modify the authRedirect once auth is set up */}
-            <ProtectedRoute
+            <Route
               exact
               path="/specs"
               component={BrewSpecs}
             />
 
-            <ProtectedRoute
+            <Route
               exact
               path="/timer"
               component={Timer}
             />
 
-            <ProtectedRoute
+            <Route
               exact
               path="/tasting"
               component={TastingNotes}
@@ -136,12 +136,6 @@ class App extends Component {
               component={Admin}
             />
 
-            <Route
-              exact
-              path="/review"
-              component={ReviewBrew}
-            />
-
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
@@ -152,4 +146,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default connect(mapStoreToProps)(App);
