@@ -6,6 +6,7 @@ class BrewSpecs extends Component {
 
     state = {
         newSpecs:{
+            user_id: 0,
             brew_id: 0,
             method: '',
             roast: '',
@@ -33,6 +34,7 @@ class BrewSpecs extends Component {
         this.setState({
             newSpecs: {
                 ...this.state.newSpecs,
+                user_id: this.props.store.user.id,
                 brew_id: this.props.store.brew[this.props.store.brew.length - 1].id + 1,
                 [eventType]: event.target.value
             }

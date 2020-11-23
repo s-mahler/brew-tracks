@@ -48,6 +48,8 @@ class Timer extends Component {
                 on: false
             });
             clearInterval(this.timer);
+            console.log(this.state.timerMath);
+            console.log(this.state.lapArray);
         }
     }
 

@@ -34,6 +34,7 @@ class BrewDetails extends Component {
     }
 
     getSpecificBrew = () => {
+        console.log(this.props);
         this.props.dispatch({type: 'GET_SPECIFIC_BREW', payload: this.props.match.params.id});
     }
 
@@ -71,7 +72,7 @@ class BrewDetails extends Component {
 
     showWarning = () => {
         if (window.confirm('Warning: this is permanent')) {
-            this.props.dispatch({type: 'DELETE_BREW', payload: this.props.match.params.id});
+            this.props.dispatch({type: 'DELETE_BREW', payload: {brew_id: this.props.match.params.id, user_id: this.props.store.user.id}});
             this.props.dispatch({type: 'DELETE_TIMES', payload: this.props.match.params.id});
             this.props.history.push(`/brews/${this.props.store.user.id}`)
         };
