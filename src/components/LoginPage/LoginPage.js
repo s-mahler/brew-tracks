@@ -4,6 +4,11 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
 
 class LoginPage extends Component {
+
+  startBrew = () => {
+    this.props.history.push('/specs')
+  }
+
   render() {
     return (
       <div>
@@ -19,6 +24,9 @@ class LoginPage extends Component {
           >
             Register
           </button>
+          <br/>
+          <br/>
+          <button className="btn btn_sizeSm" onClick={this.startBrew}>Start Brew</button>
         </center>
       </div>
     );
