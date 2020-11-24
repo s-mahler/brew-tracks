@@ -51,44 +51,45 @@ router.get('/times/:id', (req, res) => {
         });
 }); 
 
-router.post('/', (req, res) => {
-    const newBrew = req.body;
-    const queryText =  `INSERT INTO "brews" ("origin", "roast", "grind", "coffee_amount", "water_amount" , "brew_method", "taste", "aroma", "body", "mouth_feel", "user_id")
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-    const queryValues = [
-        newBrew.specs.origin,
-        newBrew.specs.roast,
-        newBrew.specs.grind,
-        newBrew.specs.amount_coffee,
-        newBrew.specs.amount_water,
-        newBrew.specs.method,
-        newBrew.tasting.taste,
-        newBrew.tasting.aroma,
-        newBrew.tasting.body,
-        newBrew.tasting.mouth_feel,
-        req.user.id
-    ];
-    pool.query(queryText, queryValues)
-        .then(() => {
-            res.sendStatus(200);
-        }).catch((error) => {
-            res.sendStatus(500);
-            console.log('Error in brew POST', error)
-        })
-});
+router.post('/', async (req, res) => {
 
-router.post('/times', (req, res) => {
-    const queryText = `INSERT INTO "times" ("centiseconds", "seconds", "minutes") 
-                        VALUES ($1, $2, $3);`;
-    const time = req.body.times;
-    for (let i = 0; i < time.length; i++) {
-        pool.query(queryText, [time[i].centiseconds, time[i].seconds, time[i].minutes])
-        .then(() => {
-            res.sendStatus(200);
-        }).catch((error) => {
-            res.sendStatus(500);
-            console.log('Error in brew POST', error)
-        })
+    const newSpecs = req.body.specs;
+    const newTasting = req.body.tasting;
+    const newTimes = req.body.times;
+
+    const connection = await pool.connect();
+    try {
+        await connection.query('BEGIN');
+        const brewQueryText =  `INSERT INTO "brews" ("origin", "roast", "grind", "coffee_amount", "water_amount" , "brew_method", "taste", "aroma", "body", "mouth_feel", "user_id")
+                                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id";`;
+        const brewQueryValues = [
+            newSpecs.origin,
+            newSpecs.roast,
+            newSpecs.grind,
+            newSpecs.amount_coffee,
+            newSpecs.amount_water,
+            newSpecs.method,
+            newTasting.taste,
+            newTasting.aroma,
+            newTasting.body,
+            newTasting.mouth_feel,
+            newSpecs.user_id
+        ];
+        const result = await connection.query(brewQueryText, brewQueryValues);
+        const brew_id = result.rows[0].id;
+        const timesQueryText = `INSERT INTO "times" ("centiseconds", "seconds", "minutes", "brew_id") 
+                                VALUES ($1, $2, $3, $4);`
+        for (let i = 0; i < newTimes.length; i++) {
+            await connection.query(timesQueryText, [newTimes[i].centiseconds, newTimes[i].seconds, newTimes[i].minutes, brew_id]);
+        }
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        console.log('Add brew error - rolling back new brew', error);
+        res.sendStatus(500);
+    } finally {
+        connection.release();
     }
 });
 

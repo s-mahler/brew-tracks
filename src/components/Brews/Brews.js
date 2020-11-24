@@ -13,7 +13,6 @@ class Brews extends Component {
     }
 
     goToDetails = (brewId) => {
-        this.updateTimesId();
         this.props.history.push(`/details/${brewId}`);
     };
 
@@ -23,10 +22,6 @@ class Brews extends Component {
 
     getUserBrews = () => {
         this.props.dispatch({type: 'GET_BREWS', payload: this.props.match.params.id});
-    }
-
-    updateTimesId = () => {
-        this.props.dispatch({type: 'PUT_TIMES_ID', payload: {brew_id: this.props.store.brew[this.props.store.brew.length - 1].id}})
     }
 
     render() {
