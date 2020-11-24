@@ -153,16 +153,4 @@ router.put('/times', (req, res) => {
     }
 });
 
-router.put('/timesId', (req, res) => {
-    console.log(req.body);
-    const queryText = `UPDATE "times" SET "brew_id" = $1 where "brew_id" IS NULL;`;
-    pool.query(queryText, [req.body.brew_id])
-        .then(() => {
-            res.sendStatus(200);
-         }).catch((error) => {
-            res.sendStatus(500);
-            console.log("error in PUT times' brew ID", error);
-         });
-});
-
 module.exports = router;
