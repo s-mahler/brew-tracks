@@ -34,18 +34,18 @@ class TastingNotes extends Component {
                 <h1>Tasting Notes</h1>
 
                 <label>Taste:</label>
-                <input onChange={(event) => this.handleChange(event, 'taste')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'taste')}></input>
 
                 <label>Aroma:</label>
-                <input onChange={(event) => this.handleChange(event, 'aroma')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'aroma')}></input>
 
                 <label>Body:</label>
-                <input onChange={(event) => this.handleChange(event, 'body')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'body')}></input>
 
                 <label>Mouth Feel:</label>
-                <input onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
 
-                <button onClick={this.handleSubmit}>Finish</button>
+                <button className="button" onClick={this.handleSubmit}>Finish</button>
             </div>
         )
     }

@@ -27,7 +27,7 @@ class Brews extends Component {
     render() {
         return (
             <>
-                <button onClick={this.accountDetails}>Account Details</button>
+                <button className="button" onClick={this.accountDetails}>Account Details</button>
                 
                 <h1>Your brews</h1>
                 
@@ -42,7 +42,7 @@ class Brews extends Component {
                     })}
                 </ul>
 
-                <button onClick={this.startAgain}>Start new brew</button>
+                <button className="button" onClick={this.startAgain}>Start new brew</button>
             </>
         )
     }

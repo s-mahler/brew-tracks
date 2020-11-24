@@ -45,24 +45,24 @@ class BrewSpecs extends Component {
                 <h1>Brew Specifications</h1>
 
                 <label>Method:</label>
-                <input onChange={(event) => this.handleChange(event, 'method')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'method')}></input>
 
                 <label>Roast:</label>
-                <input onChange={(event) => this.handleChange(event, 'roast')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'roast')}></input>
 
                 <label>Grind:</label>
-                <input onChange={(event) => this.handleChange(event, 'grind')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'grind')}></input>
 
                 <label>Origin:</label>
-                <input onChange={(event) => this.handleChange(event, 'origin')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'origin')}></input>
 
                 <label>Amount of coffee:</label>
-                <input onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
 
                 <label>Amount of water:</label>
-                <input onChange={(event) => this.handleChange(event, 'amount_water')}></input>
+                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'amount_water')}></input>
 
-                <button onClick={this.handleSubmit}>Time it</button>
+                <button className="button" onClick={this.handleSubmit}>Time it</button>
             </div>
         )
     }
