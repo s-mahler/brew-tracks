@@ -34,7 +34,6 @@ class BrewDetails extends Component {
     }
 
     getSpecificBrew = () => {
-        console.log(this.props);
         this.props.dispatch({type: 'GET_SPECIFIC_BREW', payload: this.props.match.params.id});
     }
 
