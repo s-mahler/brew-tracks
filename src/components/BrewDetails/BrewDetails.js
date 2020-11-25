@@ -33,14 +33,18 @@ class BrewDetails extends Component {
         this.getTimes();
     }
 
+    // Get brew by id in the url, set it in the redux store
     getSpecificBrew = () => {
         this.props.dispatch({type: 'GET_SPECIFIC_BREW', payload: this.props.match.params.id});
     }
 
+    // Get times by id in the url
     getTimes = () => {
         this.props.dispatch({type: 'GET_TIMES', payload: this.props.match.params.id})
     }
 
+    // Toggle conditional render
+    // Dispatch local state to a PUT route to edit brew and times
     putBrew = () => {
         this.setState({
             toggle: !this.state.toggle,
@@ -49,6 +53,7 @@ class BrewDetails extends Component {
         this.props.dispatch({type: 'PUT_TIMES', payload: this.state.timesEdit});
     }
 
+    // On click of the edit button, set local state to what is stored in the redux store
     toggleView = () => {
         this.setState({
             toggle: !this.state.toggle,
@@ -69,6 +74,9 @@ class BrewDetails extends Component {
         });
     }
 
+    // On click of the delete button, show a warning
+    // If OK is clicked, DELETE brew and times based on id in url
+    // Send user back to their brews list
     showWarning = () => {
         if (window.confirm('Warning: this is permanent')) {
             this.props.dispatch({type: 'DELETE_BREW', payload: {brew_id: this.props.match.params.id, user_id: this.props.store.user.id}});
@@ -77,6 +85,7 @@ class BrewDetails extends Component {
         };
     }
 
+    // Handle change for editing brew inputs
     handleChange = (event, eventType) => {
         console.log(this.state.brewEdit);
         this.setState({
@@ -87,6 +96,8 @@ class BrewDetails extends Component {
         });
     }
 
+    // handle change for times inputs, looping over every index of the times array
+    // after the loop is complete, then the state is modified
     handleTimeChange = (event, eventType, timeId) => {
         console.log(this.state.timesEdit);
         let timesArray = this.state.timesEdit;
@@ -108,6 +119,7 @@ class BrewDetails extends Component {
         return (
             <>
             <button className="button" onClick={this.showWarning}>DELETE</button>
+                {/* Conditional render based on toggle boolean */}
                 {this.state.toggle ? (
 
                 <>
