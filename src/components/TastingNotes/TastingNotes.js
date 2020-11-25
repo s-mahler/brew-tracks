@@ -19,13 +19,13 @@ class TastingNotes extends Component {
     };
 
     handleChange = (event, eventType) => {
-        this.props.dispatch({type: 'ADD_TASTING', payload: this.state.newTasting});
-        this.setState({
-            newTasting: {
-                ...this.state.newTasting,
-                [eventType]: event.target.value
-            }
-        });
+        this.props.dispatch({type: 'ADD_TASTING', payload: {key: eventType, value: event.target.value}});
+        // this.setState({
+        //     newTasting: {
+        //         ...this.state.newTasting,
+        //         [eventType]: event.target.value
+        //     }
+        // });
     } 
 
     render() {
