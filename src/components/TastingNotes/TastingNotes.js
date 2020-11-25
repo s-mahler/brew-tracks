@@ -18,6 +18,7 @@ class TastingNotes extends Component {
         this.props.history.push(`/brews/${this.props.store.user.id}`);
     };
 
+    // go straight to redux store, skip local
     handleChange = (event, eventType) => {
         this.props.dispatch({type: 'ADD_TASTING', payload: this.state.newTasting});
         this.setState({
