@@ -73,22 +73,37 @@ class Timer extends Component {
 
     render() {
         return (
+
             <>
-            <h1>{this.state.timerMath.minutes} : {this.state.timerMath.seconds} : {this.state.timerMath.centiseconds}</h1>
-            <button onClick={this.startTimer}>Start</button>
-            <button onClick={this.setLap}>Lap</button>
-            <button onClick={this.stopTimer}>Stop</button>
-            <button onClick={this.resetTimer}>Reset</button>
-            {this.state.lapArray.map((time, index) => {
-                return <div key={index}>
-                    <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                <div className="section has-text-weight-bold">
+                    <p className="is-size-1">{this.state.timerMath.minutes} : {this.state.timerMath.seconds} : {this.state.timerMath.centiseconds}</p>
                 </div>
-            })}
 
-            <br/>
-            <br/>
+                <div className="columns is-mobile">
+                    
+                    <div className="column is-narrow has-text-centered">
+                        <div className="buttons has-addons are-small">
+                            <button className="button" onClick={this.startTimer}>Start</button>
+                            <button className="button" onClick={this.setLap}>Lap</button>
+                            <button className="button" onClick={this.stopTimer}>Stop</button>
+                        </div>
+                    
+                        <div className="m-4">
+                            <button className="button is-small" onClick={this.resetTimer}>Reset</button>
+                        </div>
 
-            <button onClick={this.brewComplete}>Brewing Complete</button>
+                        <button className="button is-small" onClick={this.brewComplete}>Brewing Complete</button>
+                    </div>
+                
+                    <div className="column has-text-centered has-background-light">
+                        <p>Times</p>
+                        {this.state.lapArray.map((time, index) => {
+                            return <div key={index}>
+                                <p>{time.minutes} : {time.seconds} : {time.centiseconds}</p>
+                            </div>
+                        })}
+                    </div>
+                </div>
             </>
         )
     }

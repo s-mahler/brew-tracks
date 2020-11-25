@@ -107,11 +107,11 @@ class BrewDetails extends Component {
     render() {
         return (
             <>
-            <button onClick={this.showWarning}>DELETE</button>
+            <button className="button" onClick={this.showWarning}>DELETE</button>
                 {this.state.toggle ? (
 
                 <>
-                <button onClick={this.toggleView}>Edit</button>
+                <button className="button" onClick={this.toggleView}>Edit</button>
                 <h1>Brew Details</h1>
                 <div>
                 {this.props.store.brew.map(brew => {
@@ -173,7 +173,7 @@ class BrewDetails extends Component {
                 ) : (
 
                     <div>
-                        <button onClick={this.putBrew}>Save</button>
+                        <button className="button" onClick={this.putBrew}>Save</button>
                         <h1>Brew Details</h1>
                         <div className="container">
                             <div className="brew">
@@ -228,7 +228,7 @@ class BrewDetails extends Component {
                         </div>
 
                 )}
-                <button onClick={this.goBack}>Back</button>
+                <button className="button" onClick={this.goBack}>Back</button>
             </>
         )
     }
