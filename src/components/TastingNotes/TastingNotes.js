@@ -4,29 +4,22 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class TastingNotes extends Component {
 
-    state = {
-        newTasting:{
-            taste: '',
-            aroma: '',
-            body: '',
-            mouth_feel: '',
-        }
-    }
+    // state = {
+    //     newTasting:{
+    //         taste: '',
+    //         aroma: '',
+    //         body: '',
+    //         mouth_feel: '',
+    //     }
+    // }
 
     handleSubmit = () => {
         this.props.dispatch({type: 'ADD_BREW', payload: this.props.store.inputs});
         this.props.history.push(`/brews/${this.props.store.user.id}`);
     };
 
-    // go straight to redux store, skip local
     handleChange = (event, eventType) => {
         this.props.dispatch({type: 'ADD_TASTING', payload: {key: eventType, value: event.target.value}});
-        // this.setState({
-        //     newTasting: {
-        //         ...this.state.newTasting,
-        //         [eventType]: event.target.value
-        //     }
-        // });
     } 
 
     render() {
