@@ -26,24 +26,26 @@ class Brews extends Component {
 
     render() {
         return (
-            <>
-                <button className="button" onClick={this.accountDetails}>Account Details</button>
+            <div>
                 
-                <h1>Your brews</h1>
                 
-                <ul>
+                <p className="is-size-3 has-text-centered has-text-weight-bold">Your brews</p>
+                
+                <ul className="tile has-text-centered is-capitalized is-parent">
                     {this.props.store.brew.map(brew => {
-                        return <li className="brew" key={brew.id} onClick={() => this.goToDetails(brew.id)}>
-                                    <div>
+                        return <li className="column is-narrow" key={brew.id} onClick={() => this.goToDetails(brew.id)}>
+                                    <div className="tile is-child box">
                                         <p>{brew.origin}</p>
                                         <p>{brew.brew_method}</p>
                                     </div>
                                 </li>
                     })}
                 </ul>
-
-                <button className="button" onClick={this.startAgain}>Start new brew</button>
-            </>
+                <div className="container is-fluid">
+                <button className="button m-1" onClick={this.startAgain}>Start new brew</button>
+                <button className="button m-1" onClick={this.accountDetails}>Account Details</button>
+                </div>
+            </div>
         )
     }
 }
