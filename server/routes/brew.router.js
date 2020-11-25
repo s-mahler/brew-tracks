@@ -2,9 +2,9 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// const {
-//     rejectUnauthenticated,
-//   } = require("../modules/authentication-middleware");
+const {
+    rejectUnauthenticated,
+  } = require("../modules/authentication-middleware");
 
 router.get('/', (req, res) => {
     const queryText = 'SELECT * FROM "brews";';
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 }); 
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'SELECT * FROM "brews" WHERE "user_id" = $1';
     pool.query(queryText, [req.params.id])
         .then(result => {
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
         });
 });  
 
-router.get('/details/:id', (req, res) => {
+router.get('/details/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'SELECT * FROM "brews" WHERE "id" = $1';
     pool.query(queryText, [req.params.id])
         .then(result => {
@@ -40,7 +40,7 @@ router.get('/details/:id', (req, res) => {
         });
 });
 
-router.get('/times/:id', (req, res) => {
+router.get('/times/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'SELECT * FROM "times" WHERE "brew_id" = $1';
     pool.query(queryText, [req.params.id])
         .then(result => {
@@ -51,7 +51,7 @@ router.get('/times/:id', (req, res) => {
         });
 }); 
 
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
     const newSpecs = req.body.specs;
     const newTasting = req.body.tasting;
@@ -93,7 +93,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', rejectUnauthenticated, (req,res) => {
     const queryText = `DELETE FROM "brews" WHERE "id" = $1`
     pool.query(queryText, [req.params.id])
         .then(() => {
@@ -104,7 +104,7 @@ router.delete('/:id', (req,res) => {
         });
 });
 
-router.delete('/times/:id', (req,res) => {
+router.delete('/times/:id', rejectUnauthenticated, (req,res) => {
     const queryText = `DELETE FROM "times" WHERE "brew_id" = $1`
     pool.query(queryText, [req.params.id])
         .then(() => {
@@ -115,7 +115,7 @@ router.delete('/times/:id', (req,res) => {
         });
 });
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     const brewEdit = req.body;
     const queryText = `UPDATE "brews" SET "origin" = $1, "roast" = $2, "grind" = $3, "coffee_amount" = $4, "water_amount" = $5, "brew_method" = $6, "taste" = $7, "aroma" = $8, "body" = $9, "mouth_feel" = $10 WHERE "id" = $11;`;
     const queryValues = [
@@ -140,7 +140,7 @@ router.put('/', (req, res) => {
         });
 });
 
-router.put('/times', (req, res) => {
+router.put('/times', rejectUnauthenticated, (req, res) => {
     const queryText = `UPDATE "times" SET "seconds" = $1, "minutes" = $2 WHERE "id" = $3;`;
     for (let i = 0; i < req.body.length; i++) {
         pool.query(queryText, [req.body[i].seconds, req.body[i].minutes, req.body[i].id])
