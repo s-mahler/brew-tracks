@@ -24,12 +24,12 @@ class LandingPage extends Component {
     return (
       <div className="has-text-centered">
       <p className="m-6 is-size-4 has-text-weight-bold">Welcome, {this.props.store.user.username}!</p>
-      <div className="columns is-mobile">
+      <div className="is-flex is-justify-content-space-evenly">
         
-        <div className="column">
+        <div className="">
           <button className="button" onClick={this.startBrew}>Start Brew</button>
         </div>
-        <div className="column">
+        <div className="">
           <button className="button" onClick={this.viewBrews}>View Your Brews</button>
         </div>
       </div>

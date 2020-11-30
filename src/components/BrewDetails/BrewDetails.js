@@ -118,21 +118,17 @@ class BrewDetails extends Component {
     render() {
         return (
             <>
-            <button className="button" onClick={this.showWarning}>DELETE</button>
-
-            <div className="is-capitalized">
-
-                {/* Conditional render based on toggle boolean */}
-
+            <button className="button is-danger" onClick={this.showWarning}>DELETE</button>
+            <div className="is-capitalized has-text-justified">
                 {this.state.toggle ? (
 
                 <>
-                <button className="button" onClick={this.toggleView}>Edit</button>
+                
                 <h1>Brew Details</h1>
                 <div>
                 {this.props.store.brew.map(brew => {
-                    return <div className='container' key={brew.id}>
-                                <div className="brew">
+                    return <div className="is-mobile" key={brew.id}>
+                                <div className="box">
                                     <h3>Specifications</h3>
 
                                     <label>Method:</label>
@@ -154,7 +150,7 @@ class BrewDetails extends Component {
                                     <p>{brew.water_amount}</p>
                                 </div>
 
-                                <div className="brew">
+                                <div className="box">
                                     <h3>Tasting Notes</h3>
 
                                     <label>Aroma:</label>
@@ -173,10 +169,11 @@ class BrewDetails extends Component {
                     })}
                     </div>
                     <h1>Phases</h1>
-                    <ul className="brew">
-                    {this.props.store.times.map(time => {
+                    <ul className="box">
+                    {this.props.store.times.map((time, index) => {
                         return <li key={time.id}>
-                                    <div >
+                                    <div>
+                                        <p className="has-text-weight-bold"> {index + 1}: </p>
                                         <p>{time.minutes} minutes</p> 
                                     
                                         <p>{time.seconds} seconds</p>
@@ -189,10 +186,10 @@ class BrewDetails extends Component {
                 ) : (
 
                     <div>
-                        <button className="button" onClick={this.putBrew}>Save</button>
+                        <button className="button my-5" onClick={this.putBrew}>Save</button>
                         <h1>Brew Details</h1>
-                        <div className="container">
-                            <div className="brew">
+                        <div className="is-flex is-flex-direction-column">
+                            <div className="box is-flex is-flex-direction-column">
                                 <label>Method:</label>
                                 <input value={this.state.brewEdit.method} onChange={(event) => this.handleChange(event, 'method')}></input>
 
@@ -212,7 +209,7 @@ class BrewDetails extends Component {
                                 <input value={this.state.brewEdit.amount_water} onChange={(event) => this.handleChange(event, 'amount_water')}></input>
                             </div>
 
-                            <div className="brew">
+                            <div className="box is-flex is-flex-direction-column">
                                 <label>Aroma:</label>
                                 <input value={this.state.brewEdit.aroma} onChange={(event) => this.handleChange(event, 'aroma')}></input>
 
@@ -226,11 +223,11 @@ class BrewDetails extends Component {
                                 <input value={this.state.brewEdit.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
                             </div>
                         </div>
-                            <ul className="brew">
-                                {this.state.timesEdit.map((time) => {
+                            <ul className="box is-flex is-flex-direction-column">
+                                {this.state.timesEdit.map((time, index) => {
                                     return <li key={time.id}>
-                                                <div className="times">
-
+                                                <div className="is-flex is-flex-direction-column">
+                                                    <p>{index + 1}</p>
                                                     <label> Minutes:</label>
                                                     <input type='number' value={time.minutes} onChange={(event) => this.handleTimeChange(event, 'minutes', time.id)}></input>
 
@@ -246,6 +243,7 @@ class BrewDetails extends Component {
                 )}
                 </div>
                 <button className="button" onClick={this.goBack}>Back</button>
+                <button className="button" onClick={this.toggleView}>Edit</button>
             </>
             
         )
