@@ -33,6 +33,10 @@ class TastingNotes extends Component {
         })
     }
 
+    push = () => {
+        this.props.dispatch({type: 'ADD_TASTING', payload: this.state.newTasting});
+    }
+
     render() {
         return (
             <div className="formPanel brew">
@@ -47,7 +51,7 @@ class TastingNotes extends Component {
                 <label>Body:</label>
                 <input className="input is-rounded" value={this.state.newTasting.body} onChange={(event) => this.handleChange(event, 'body')}></input>
 
-                <label>Mouth Feel:</label>
+                <label onClick={this.push}>Mouth Feel:</label>
                 <input className="input is-rounded" value={this.state.newTasting.mouth_feel} onChange={(event) => this.handleChange(event, 'mouth_feel')}></input>
 
                 <button className="button" onClick={this.handleSubmit}>Finish</button>
