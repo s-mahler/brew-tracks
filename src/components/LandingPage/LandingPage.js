@@ -22,9 +22,17 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div>
-        <button className="btn btn_sizeSm" onClick={this.startBrew}>Start Brew</button>
-        <button className="btn btn_sizeSm" onClick={this.viewBrews}>View Brews</button>
+      <div className="has-text-centered">
+      <p className="m-6 is-size-4 has-text-weight-bold">Welcome, {this.props.store.user.username}!</p>
+      <div className="columns is-mobile">
+        
+        <div className="column">
+          <button className="button" onClick={this.startBrew}>Start Brew</button>
+        </div>
+        <div className="column">
+          <button className="button" onClick={this.viewBrews}>View Your Brews</button>
+        </div>
+      </div>
       </div>
     );
   }

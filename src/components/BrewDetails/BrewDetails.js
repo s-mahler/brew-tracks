@@ -119,7 +119,11 @@ class BrewDetails extends Component {
         return (
             <>
             <button className="button" onClick={this.showWarning}>DELETE</button>
+
+            <div className="is-capitalized">
+
                 {/* Conditional render based on toggle boolean */}
+
                 {this.state.toggle ? (
 
                 <>
@@ -240,10 +244,15 @@ class BrewDetails extends Component {
                         </div>
 
                 )}
+                </div>
                 <button className="button" onClick={this.goBack}>Back</button>
             </>
+            
         )
+        
     }
+    
 }
+
 
 export default connect(mapStoreToProps)(BrewDetails);

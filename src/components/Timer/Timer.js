@@ -58,6 +58,7 @@ class Timer extends Component {
     }
 
     // Only works from a stopped timer, not from a running one
+    // sets the values to the current time
     resetTimer = () => {
         this.setState({
           timeStart: 0,
@@ -69,6 +70,7 @@ class Timer extends Component {
             minutes: "00"
         }
         });
+        this.stopTimer();
       };
 
     render() {
