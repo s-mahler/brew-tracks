@@ -27,8 +27,9 @@ import Brews from '../Brews/Brews';
 import BrewDetails from '../BrewDetails/BrewDetails';
 import Admin from '../Admin/Admin';
 
-import './App.css';
+
 import 'bulma/css/bulma.css';
+import './App.css';
 
 class App extends Component {
   componentDidMount() {

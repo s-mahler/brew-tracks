@@ -94,8 +94,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 });
 
 router.delete('/:id', rejectUnauthenticated, (req,res) => {
-    const queryText = `DELETE FROM "brews" WHERE "id" = $1`
-    pool.query(queryText, [req.params.id])
+    const queryText = `DELETE FROM "brews" WHERE "id" = $1 AND "user_id" = $2;`
+    pool.query(queryText, [req.params.id, req.user.id])
         .then(() => {
             res.sendStatus(200);
         }).catch(error => {
@@ -117,7 +117,7 @@ router.delete('/times/:id', rejectUnauthenticated, (req,res) => {
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     const brewEdit = req.body;
-    const queryText = `UPDATE "brews" SET "origin" = $1, "roast" = $2, "grind" = $3, "coffee_amount" = $4, "water_amount" = $5, "brew_method" = $6, "taste" = $7, "aroma" = $8, "body" = $9, "mouth_feel" = $10 WHERE "id" = $11;`;
+    const queryText = `UPDATE "brews" SET "origin" = $1, "roast" = $2, "grind" = $3, "coffee_amount" = $4, "water_amount" = $5, "brew_method" = $6, "taste" = $7, "aroma" = $8, "body" = $9, "mouth_feel" = $10 WHERE "id" = $11 AND "user_id" = $12;`;
     const queryValues = [
         brewEdit.origin,
         brewEdit.roast,
@@ -129,7 +129,8 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         brewEdit.aroma,
         brewEdit.body,
         brewEdit.mouth_feel,
-        brewEdit.id
+        brewEdit.id,
+        req.user.id
     ]
     pool.query(queryText, queryValues)
         .then(() => {
@@ -140,17 +141,18 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
-router.put('/times', rejectUnauthenticated, (req, res) => {
+// async await for resend headers error
+router.put('/times', rejectUnauthenticated, async (req, res) => {
     const queryText = `UPDATE "times" SET "seconds" = $1, "minutes" = $2 WHERE "id" = $3;`;
     for (let i = 0; i < req.body.length; i++) {
-        pool.query(queryText, [req.body[i].seconds, req.body[i].minutes, req.body[i].id])
-            .then(() => {
-                res.sendStatus(200);
-            }).catch((error) => {
-                res.sendStatus(500);
-                console.log('error in PUT times', error);
-            });
+       try{ 
+           await pool.query(queryText, [req.body[i].seconds, req.body[i].minutes, req.body[i].id])
+       } catch (error) {
+           res.sendStatus(500);
+           return
+       }
     }
+    return res.sendStatus(200);
 });
 
 module.exports = router;

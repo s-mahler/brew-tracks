@@ -26,7 +26,7 @@ class Brews extends Component {
 
     render() {
         return (
-            <div>
+            <div className="is-flex is-flex-direction-column">
                 
                 
                 <p className="is-size-3 has-text-centered has-text-weight-bold">Your brews</p>
@@ -41,9 +41,9 @@ class Brews extends Component {
                                 </li>
                     })}
                 </ul>
-                <div className="container is-fluid">
-                <button className="button m-1" onClick={this.startAgain}>Start new brew</button>
-                <button className="button m-1" onClick={this.accountDetails}>Account Details</button>
+                <div className="container is-flex is-flex-direction-column">
+                    <button className="button m-1" onClick={this.startAgain}>Start new brew</button>
+                    <button className="button m-1" onClick={this.accountDetails}>Account Details</button>
                 </div>
             </div>
         )
