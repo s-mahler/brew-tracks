@@ -77,8 +77,8 @@ class Timer extends Component {
         return (
 
             <>
-                <div className="section has-text-weight-bold">
-                    <p className="is-size-1">{this.state.timerMath.minutes} : {this.state.timerMath.seconds} : {this.state.timerMath.centiseconds}</p>
+                <div className="section has-text-centered has-text-weight-bold">
+                    <p className="is-size-2">{this.state.timerMath.minutes} : {this.state.timerMath.seconds} : {this.state.timerMath.centiseconds}</p>
                 </div>
 
                 <div className="columns is-mobile">
