@@ -39,28 +39,42 @@ class BrewSpecs extends Component {
         });
     } 
 
+    populate = () => {
+        this.setState({
+            newSpecs:{
+                user_id: this.props.store.user.id,
+                method: 'Pour over',
+                roast: 'Light',
+                grind: 'Fine',
+                origin: 'Ethiopia',
+                amount_coffee: '20 g',
+                amount_water: '300 g'
+            }
+        })
+    }
+
     render() {
         return (
             <div className="formPanel brew">
-                <h1>Brew Specifications</h1>
+                <h1 onClick={this.populate}>Brew Specifications</h1>
 
                 <label>Method:</label>
-                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'method')}></input>
+                <input className="input is-rounded" value={this.state.newSpecs.method} onChange={(event) => this.handleChange(event, 'method')}></input>
 
                 <label>Roast:</label>
-                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'roast')}></input>
+                <input className="input is-rounded" value={this.state.newSpecs.roast} onChange={(event) => this.handleChange(event, 'roast')}></input>
 
                 <label>Grind:</label>
-                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'grind')}></input>
+                <input className="input is-rounded" value={this.state.newSpecs.grind} onChange={(event) => this.handleChange(event, 'grind')}></input>
 
                 <label>Origin:</label>
-                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'origin')}></input>
+                <input className="input is-rounded" value={this.state.newSpecs.origin} onChange={(event) => this.handleChange(event, 'origin')}></input>
 
                 <label>Amount of coffee:</label>
-                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
+                <input className="input is-rounded" value={this.state.newSpecs.amount_coffee} onChange={(event) => this.handleChange(event, 'amount_coffee')}></input>
 
                 <label>Amount of water:</label>
-                <input className="input is-rounded" onChange={(event) => this.handleChange(event, 'amount_water')}></input>
+                <input className="input is-rounded" value={this.state.newSpecs.amount_water} onChange={(event) => this.handleChange(event, 'amount_water')}></input>
 
                 <button className="button" onClick={this.handleSubmit}>Time it</button>
             </div>
