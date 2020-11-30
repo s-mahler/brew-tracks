@@ -29,9 +29,9 @@ class Brews extends Component {
             <div className="is-flex is-flex-direction-column">
                 
                 
-                <p className="is-size-3 has-text-centered has-text-weight-bold">Your brews</p>
+                <p className="is-size-3 has-text-centered has-text-weight-bold">Your Brews</p>
                 
-                <ul className="tile has-text-centered is-capitalized is-parent">
+                <ul className="tile has-text-centered is-capitalized is-flex is-flex-direction-column">
                     {this.props.store.brew.map(brew => {
                         return <li className="column is-narrow" key={brew.id} onClick={() => this.goToDetails(brew.id)}>
                                     <div className="tile is-child box">

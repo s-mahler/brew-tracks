@@ -118,18 +118,20 @@ class BrewDetails extends Component {
     render() {
         return (
             <>
-            <button className="button is-danger" onClick={this.showWarning}>DELETE</button>
+            
             <div className="is-capitalized has-text-justified">
                 {this.state.toggle ? (
 
                 <>
+                <div className="is-flex is-justify-content-center">
+                    <p className="is-size-3 m-3">Brew Details</p>
+                    <button className="button m-3 is-align-self-flex-end" onClick={this.toggleView}>Edit</button>
+                </div>
                 
-                <h1>Brew Details</h1>
                 <div>
                 {this.props.store.brew.map(brew => {
                     return <div className="is-mobile" key={brew.id}>
                                 <div className="box">
-                                    <h3>Specifications</h3>
 
                                     <label>Method:</label>
                                     <p>{brew.brew_method}</p>
@@ -151,7 +153,6 @@ class BrewDetails extends Component {
                                 </div>
 
                                 <div className="box">
-                                    <h3>Tasting Notes</h3>
 
                                     <label>Aroma:</label>
                                     <p>{brew.aroma}</p>
@@ -185,9 +186,12 @@ class BrewDetails extends Component {
 
                 ) : (
 
-                    <div>
-                        <button className="button my-5" onClick={this.putBrew}>Save</button>
-                        <h1>Brew Details</h1>
+                    <div>                
+                        <div className="is-flex is-justify-content-center">
+                            <p className="is-size-3 m-3">Brew Details</p>
+                            <button className="button m-3 is-align-self-flex-end" onClick={this.putBrew}>Save</button>
+                        </div>
+
                         <div className="is-flex is-flex-direction-column">
                             <div className="box is-flex is-flex-direction-column">
                                 <label>Method:</label>
@@ -242,8 +246,10 @@ class BrewDetails extends Component {
 
                 )}
                 </div>
-                <button className="button" onClick={this.goBack}>Back</button>
-                <button className="button" onClick={this.toggleView}>Edit</button>
+                <div className="is-flex is-justify-content-center">
+                    <button className="button m-3" onClick={this.goBack}>Back</button>
+                    <button className="button m-3 is-danger" onClick={this.showWarning}>DELETE</button>
+                </div>
             </>
             
         )
