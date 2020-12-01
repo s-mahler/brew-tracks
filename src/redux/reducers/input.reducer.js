@@ -5,8 +5,7 @@ const inputReducer = (state={}, action) => {
         case 'ADD_TIMES':
             return {...state, times: action.payload};
         case 'ADD_TASTING':
-            // return {...state, tasting: {...state.tasting, [action.payload.key]: action.payload.value}};
-            return {...state, tasting: action.payload};
+            return {...state, tasting: {...state.tasting, [action.payload.key]: action.payload.value}};
         default:
             return state;
     }
