@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    const queryText = 'SELECT * FROM "brews" WHERE "user_id" = $1';
+    const queryText = 'SELECT * FROM "brews" WHERE "user_id" = $1 ORDER BY "id"';
     pool.query(queryText, [req.params.id])
         .then(result => {
             res.send(result.rows);
